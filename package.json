@@ -1,0 +1,63 @@
+{
+  "name": "form-plus",
+  "version": "0.1.0",
+  "description": "Provide extra form features",
+  "main": "./register-with-shims.js",
+  "authors": [
+    {
+      "name": "PaulZi",
+      "email": "pavel.zimakoff@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paulzi/form-plus"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/register": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "cookie-parser": "^1.4.3",
+    "eslint": "^4.19.1",
+    "eslint-loader": "^2.1.2",
+    "express": "^4.16.4",
+    "form-association-polyfill": "^2.0.0",
+    "mocha": "^5.2.0",
+    "multer": "^1.4.1",
+    "selenium-webdriver": "^4.0.0-alpha.1",
+    "start-server-and-test": "^1.7.11",
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3",
+    "webpack-merge": "^4.2.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "last 4 Chrome versions",
+    "last 4 Firefox versions",
+    "ie >= 11",
+    "not ie < 11",
+    "Safari >= 9",
+    "Android >= 4.4",
+    "iOS >= 7.1"
+  ],
+  "scripts": {
+    "build:dev": "webpack --config webpack/dev.config.js",
+    "build:prod": "webpack --config webpack/prod.config.js",
+    "start": "node ./scripts/test-server.js",
+    "test:selenium": "eslint src/index.js && mocha -t 120000 -r @babel/register",
+    "test": "start-server-and-test start 3003 test:selenium"
+  },
+  "dependencies": {
+    "access-by-path": "^0.1.0",
+    "context-selector": "^0.1.0",
+    "data-settings": "^0.1.0",
+    "form-extra-events": "^2.0.1",
+    "polyshim": "^0.1.1"
+  }
+}
