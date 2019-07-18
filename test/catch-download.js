@@ -12,7 +12,7 @@ test.suite(env => {
 
         before(async function() {
             let downloadDir = path.resolve(__dirname, '../test-runtime');
-            let chromeOptions = new chrome.Options().headless();
+            let chromeOptions = new chrome.Options().headless().addArguments('no-sandbox');
             let firefoxOptions = new firefox.Options()
                 .setPreference('browser.download.dir', downloadDir)
                 .setPreference('browser.download.folderList', 2)
