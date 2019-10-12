@@ -253,6 +253,21 @@ app.get('/sl-on-btn', (req, res) => {
     `));
 });
 
+app.get('/sa-header', (req, res) => {
+    res.send(templateFormPlus(`
+        <form action="/response-json" method="post" data-ajax-submit="true">
+            <button>Submit</button>
+        </form>
+        <script>
+        document.addEventListener('submitdone', function(e) {
+            var code = document.createElement('code');
+            code.textContent = e.detail.xhr.responseText;
+            document.body.appendChild(code);
+        });
+        </script>
+    `));
+});
+
 app.get('/sa-fields', (req, res) => {
     res.send(templateFormPlus(`
         <form action="/response-json?query=1" method="post" data-ajax-submit="true">
@@ -586,6 +601,7 @@ app.all('/response-json', upload.any(), (req, res) => {
         body: req.body,
         files: req.files,
         cookies: req.cookies,
+        headers: req.headers,
     };
     let sendResponse = () => {
         res.send(json);

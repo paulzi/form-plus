@@ -2,11 +2,12 @@ import ExtraEvents from 'form-extra-events/standard';
 import {prepareSettings, getSettings} from "./prepare-settings";
 
 const defaultSettings = {
-    enabled:    false,
-    eventDone:  'submitdone',
-    eventFail:  'submitfail',
-    namespace:  'ajaxSubmit',
-    shorthands: null,
+    enabled:       false,
+    requestedWith: 'XMLHttpRequest',
+    eventDone:     'submitdone',
+    eventFail:     'submitfail',
+    namespace:     'ajaxSubmit',
+    shorthands:    null,
 };
 
 // shorthands for uglify
@@ -51,7 +52,7 @@ function lastHandler(e) {
         let data = getSettings(e, settings);
         if (data.enabled) {
             e.preventDefault();
-            runAjaxTransport(e.target, e.detail.activeButton);
+            runAjaxTransport(e.target, e.detail.activeButton, data);
         }
     }
 }
@@ -96,8 +97,9 @@ function trigger(form, eventName, xhr, activeButton) {
 /**
  * @param {HTMLFormElement} form
  * @param {HTMLElement} btn
+ * @param {Object} data
  */
-function runAjaxTransport(form, btn) {
+function runAjaxTransport(form, btn, data) {
     let url     = btn && btn.getAttribute('formaction')  || form.action;
     let enctype = btn && btn.getAttribute('formenctype') || form.enctype;
     let method  = btn && btn.getAttribute('formmethod')  || form.method;
@@ -121,6 +123,9 @@ function runAjaxTransport(form, btn) {
     // make xhr
     let xhr = new XMLHttpRequest();
     xhr.open(method, url, true);
+    if (data.requestedWith) {
+        xhr.setRequestHeader('X-Requested-With', data.requestedWith);
+    }
     if (!isGet && !isMultipart) {
         xhr.setRequestHeader("Content-Type", enctype);
     }

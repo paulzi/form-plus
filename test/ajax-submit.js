@@ -28,6 +28,15 @@ test.suite(env => {
 
         after(() => driver.quit());
 
+        it('Check submit ajax header', async function() {
+            await driver.get('http://localhost:3003/sa-header');
+            await driver.findElement(By.css('button')).click();
+            await driver.wait(until.elementLocated(By.css('code')), 3000);
+            let json = await driver.findElement(By.css('code')).getAttribute('innerHTML');
+            json = JSON.parse(json);
+            assert.strictEqual(json.headers['x-requested-with'], 'XMLHttpRequest');
+        });
+
         it('Check submit ajax field types', async function() {
             await driver.get('http://localhost:3003/sa-fields');
             await driver.findElement(By.css('button')).click();
