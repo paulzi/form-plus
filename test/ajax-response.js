@@ -79,6 +79,7 @@ test.suite(env => {
                 var article2 = document.querySelector('#article2');
                 var article3 = document.querySelector('#article3');
                 var checkbox = document.querySelector('input[type="checkbox"]');
+                var button   = document.querySelector('button');
 
                 return {
                     sections: !section1.previousSibling && section1.nextSibling === section2 && section2.nextSibling === checkbox,
@@ -89,6 +90,7 @@ test.suite(env => {
                     article2: article2.className === 'article2',
                     article3: article3.className === '',
                     html:     section2.innerHTML === '<p>text</p><div></div>',
+                    event:    button.getAttribute('data-test') === 'val',
                 };
             });
             assert.deepEqual(data, {
@@ -100,6 +102,7 @@ test.suite(env => {
                 article2: true,
                 article3: true,
                 html:     true,
+                event:    true,
             });
         });
     });

@@ -1,6 +1,6 @@
 {
   "name": "form-plus",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Provide extra form features",
   "main": "./register-with-shims.js",
   "authors": [

@@ -111,6 +111,7 @@ A handler is a function that takes an action node element, target (if they were 
 - `setAttr` - set attribute in target, specified in `attr` attribute of `action` tag, by value in `value` attribute
 - `removeAttr` - remove attribute in target, specified in `attr` attribute of `action` tag
 - `setProp` - set property of target element, specified in `prop` attribute of `action` tag, and JSON parsed value in `value` attribute
+- `event` - dispatch CustomEvent with name specified in `name` attribute of `action` tag, and JSON parsed params in `params` attribute
 
 ### Methods
 

@@ -100,9 +100,9 @@ function trigger(form, eventName, xhr, activeButton) {
  * @param {Object} data
  */
 function runAjaxTransport(form, btn, data) {
-    let url     = btn && btn.getAttribute('formaction')  || form.action;
-    let enctype = btn && btn.getAttribute('formenctype') || form.enctype;
-    let method  = btn && btn.getAttribute('formmethod')  || form.method;
+    let url     = btn && btn.getAttribute('formaction')  || form.getAttribute('action');
+    let enctype = btn && btn.getAttribute('formenctype') || form.getAttribute('enctype');
+    let method  = btn && btn.getAttribute('formmethod')  || form.getAttribute('method');
     let body    = null;
     let isGet       = method.toLowerCase() === 'get';
     let isMultipart = enctype === 'multipart/form-data';

@@ -541,6 +541,11 @@ app.get('/ar-builtins', (req, res) => {
             <output></output>
             <button>Submit</button>
         </form>
+        <script>
+        document.addEventListener('testEvent', function(e) {
+            document.querySelector('button').setAttribute('data-test', e.detail.testValue);
+        })
+        </script>
     `));
 });
 
@@ -566,6 +571,7 @@ app.post('/ar-builtins-response', (req, res) => {
         <action action="removeAttr" target="output input" attr="disabled"></action>
         <action action="setProp" target="output input" prop="checked" value="true"></action>
         <action action="text" target="#section2 p">text</action>
+        <action action="event" target="button" name="testEvent" params='{"detail":{"testValue":"val"}}'></action>
     `);
 });
 

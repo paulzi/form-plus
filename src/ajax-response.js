@@ -17,6 +17,7 @@ const builtInActions = {
     'setAttr':     actionSetAttr,
     'removeAttr':  actionRemoveAttr,
     'setProp':     actionSetProp,
+    'event':       actionEvent,
 };
 
 // shorthands for uglify
@@ -24,6 +25,7 @@ const win = document.defaultView;
 
 // can shim
 let objectAssign = Object.assign;
+let CustomEvent  = win.CustomEvent;
 
 // data
 let contentType, actions, evSettings;
@@ -203,13 +205,30 @@ function actionSetProp(node, target) {
     target[node.getAttribute('prop')] = val;
 }
 
+/**
+ * @param {HTMLElement} node
+ * @param {HTMLElement} target
+ */
+function actionEvent(node, target) {
+    let params = node.getAttribute('params');
+    params = params ? JSON.parse(params) : {};
+    params = objectAssign(params, {
+        bubbles:    true,
+        cancelable: true,
+    });
+    let event = new CustomEvent(node.getAttribute('name'), params);
+    target.dispatchEvent(event);
+}
+
 export default {
     /**
      * Set shims
      * @param {Function|null} [setObjectAssign]
+     * @param {Function|null} [setCustomEvent]
      */
-    setShim: function(setObjectAssign) {
+    setShim: function(setObjectAssign, setCustomEvent) {
         objectAssign = setObjectAssign || objectAssign;
+        CustomEvent  = setCustomEvent  || CustomEvent;
     },
 
     /**
