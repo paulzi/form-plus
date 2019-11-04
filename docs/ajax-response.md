@@ -26,7 +26,7 @@ On backend:
 ```php
 function actionSubscribe() {
     // ...
-    header('Content-Type: application/form-plus-response');
+    header('Content-Type: text/form-plus-response');
     echo '<action action="content" target="output">Success</action>';
 }
 ```
@@ -131,7 +131,7 @@ A handler is a function that takes an action node element, target (if they were 
 
 ### Settings
 
-- `contentType {String} ['application/form-plus-response']` - content type of response for detect and run scenario
+- `contentType {String} ['text/form-plus-response']` - content type of response for detect and run scenario
 - `actions {{}} [{}]` - list of custom actions
 - `skipBuildIns {boolean} [false]` - do not register [built-ins actions](#built-ins-actions)
  

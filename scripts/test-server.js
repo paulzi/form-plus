@@ -448,7 +448,7 @@ app.get('/ar-basic', (req, res) => {
 });
 
 app.post('/ar-basic-response', (req, res) => {
-    res.set('Content-Type', 'application/form-plus-response');
+    res.set('Content-Type', 'text/form-plus-response');
     res.send(`
         <action action="content" target="output">
             <div>response</div>
@@ -477,7 +477,7 @@ app.get('/ar-target', (req, res) => {
 });
 
 app.post('/ar-target-response', (req, res) => {
-    res.set('Content-Type', 'application/form-plus-response');
+    res.set('Content-Type', 'text/form-plus-response');
     res.send(`
         <action action="content" target="<< #section2 > output">out3</action>
         <action action="content" target="section << #output2">out2</action>
@@ -531,7 +531,7 @@ app.get('/ar-register-action', (req, res) => {
 });
 
 app.post('/ar-register-action-response', (req, res) => {
-    res.set('Content-Type', 'application/form-plus-response');
+    res.set('Content-Type', 'text/form-plus-response');
     res.send(`<action action="add" target="output">world</action>`);
 });
 
@@ -550,7 +550,7 @@ app.get('/ar-builtins', (req, res) => {
 });
 
 app.post('/ar-builtins-response', (req, res) => {
-    res.set('Content-Type', 'application/form-plus-response');
+    res.set('Content-Type', 'text/form-plus-response');
     res.send(`
         <action action="content" target="output"><section id="section2" class="section2"></section></action>
         <action action="prepend" target="output"><section id="section1"></section></action>

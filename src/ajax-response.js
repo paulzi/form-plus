@@ -18,6 +18,7 @@ const builtInActions = {
     'removeAttr':  actionRemoveAttr,
     'setProp':     actionSetProp,
     'event':       actionEvent,
+    'redirect':    actionRedirect,
 };
 
 // shorthands for uglify
@@ -73,7 +74,7 @@ function endHandler(e) {
     if (!e.defaultPrevented && e.detail && e.detail.transport === 'ajax') {
         let detail = e.detail || {};
         let cType = detail.xhr && detail.xhr.getResponseHeader('Content-Type');
-        if (cType && cType.substr(0, 30) === contentType) {
+        if (cType && cType.substr(0, contentType.length) === contentType) {
             process(detail.xhr.response, e.target);
         }
     }
@@ -220,6 +221,13 @@ function actionEvent(node, target) {
     target.dispatchEvent(event);
 }
 
+/**
+ * @param {HTMLElement} node
+ */
+function actionRedirect(node) {
+    document.location.assign(node.innerHTML);
+}
+
 export default {
     /**
      * Set shims
@@ -271,7 +279,7 @@ export default {
         }
         setSettings = setSettings || {};
         actions     = objectAssign({}, setSettings.skipBuildIns ? {} : builtInActions, setSettings.actions || {});
-        contentType = setSettings.contentType || 'application/form-plus-response';
+        contentType = setSettings.contentType || 'text/form-plus-response';
         win.addEventListener(evSettings.eventEnd, endHandler);
     },
 

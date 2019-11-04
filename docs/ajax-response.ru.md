@@ -26,7 +26,7 @@ import 'form-plus/features/ajax-response/register-with-shims';
 ```php
 function actionSubscribe() {
     // ...
-    header('Content-Type: application/form-plus-response');
+    header('Content-Type: text/form-plus-response');
     echo '<action action="content" target="output">Success</action>';
 }
 ```
@@ -131,7 +131,7 @@ AjaxResponse.register({
 
 ### Параметры
 
-- `contentType {String} ['application/form-plus-response']` - тип содержимого ответа для определения и запуска сценария
+- `contentType {String} ['text/form-plus-response']` - тип содержимого ответа для определения и запуска сценария
 - `actions {{}} [{}]` - список дополнительных действия
 - `skipBuildIns {boolean} [false]` - не регистрировать [встроенные действия](#встроенные-действия)
  
