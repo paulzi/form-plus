@@ -123,12 +123,6 @@ function runAjaxTransport(form, btn, data) {
     // make xhr
     let xhr = new XMLHttpRequest();
     xhr.open(method, url, true);
-    if (data.requestedWith) {
-        xhr.setRequestHeader('X-Requested-With', data.requestedWith);
-    }
-    if (!isGet && !isMultipart) {
-        xhr.setRequestHeader("Content-Type", enctype);
-    }
     trigger(form, evSettings.eventBefore, xhr, btn);
 
     // prepare body
@@ -142,6 +136,14 @@ function runAjaxTransport(form, btn, data) {
         } else {
             body = buildUrlEncodedParams(form);
         }
+    }
+
+    // add headers
+    if (data.requestedWith) {
+        xhr.setRequestHeader('X-Requested-With', data.requestedWith);
+    }
+    if (!isGet && !isMultipart) {
+        xhr.setRequestHeader("Content-Type", enctype);
     }
 
     // remove active btn hiddens
